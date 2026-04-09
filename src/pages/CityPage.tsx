@@ -79,13 +79,25 @@ export default function CityPage() {
           </div>
         </section>
 
-        {/* Contact info */}
+        {/* Contact info + Map */}
         <section className="container py-16">
-          <div className="mx-auto max-w-md text-center">
-            <h2 className="mb-6 text-2xl font-bold">BhumiSeva {city.name} Office</h2>
-            <div className="space-y-3 text-muted-foreground">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="mb-6 text-center text-2xl font-bold">BhumiSeva {city.name} Office</h2>
+            <div className="mb-6 space-y-3 text-center text-muted-foreground">
               <p className="flex items-center justify-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {city.address}</p>
               <p className="flex items-center justify-center gap-2"><Phone className="h-4 w-4 text-primary" /> {city.phone}</p>
+            </div>
+            <div className="overflow-hidden rounded-xl border">
+              <iframe
+                title={`BhumiSeva ${city.name} Office`}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.6!2d85.12!3d25.61!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDM2JzM2LjAiTiA4NcKwMDcnMTIuMCJF!5e0!3m2!1sen!2sin!4v1600000000000"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </section>
