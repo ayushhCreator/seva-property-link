@@ -185,8 +185,6 @@ function EnquiryForm({ service }: { service: { slug: string; name: string; field
                 <SelectTrigger><SelectValue placeholder="Select City" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Patna">Patna</SelectItem>
-                  <SelectItem value="Kolkata">Kolkata</SelectItem>
-                  <SelectItem value="Mumbai">Mumbai</SelectItem>
                 </SelectContent>
               </Select>
             </div>

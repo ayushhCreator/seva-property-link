@@ -40,9 +40,9 @@ export default function Footer() {
           <div>
             <h4 className="mb-3 text-sm font-semibold">Contact</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>📞 +91 98765 43210</li>
+              <li>📞 +91 74640 26177</li>
               <li>✉️ info@bhumiseva.co.in</li>
-              <li>📍 Patna | Kolkata | Mumbai</li>
+              <li>📍 Patna, Bihar</li>
             </ul>
           </div>
         </div>
