@@ -1,0 +1,35 @@
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export interface LeadData {
+  name: string;
+  phone: string;
+  email?: string;
+  city: string;
+  service_type: string;
+  district?: string;
+  state?: string;
+  khesra_plot_no?: string;
+  registration_number?: string;
+  office_city?: string;
+  copy_type?: string;
+  khatiyan_number?: string;
+  owner_details?: string;
+  landlord_name?: string;
+  tenant_name?: string;
+  rent_start_date?: string;
+  rent_end_date?: string;
+  property_details?: string;
+  co_owners_count?: number;
+  message?: string;
+  consent: boolean;
+}
+
+export async function submitLead(data: LeadData) {
+  const { error } = await supabase.from('leads').insert([data]);
+  if (error) throw error;
+}
