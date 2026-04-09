@@ -25,7 +25,7 @@ export default function Index() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button variant="hero" size="lg" asChild>
-              <a href="https://wa.me/919876543210?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
                 Abhi Book Karo
               </a>
             </Button>
@@ -105,7 +105,7 @@ export default function Index() {
           <p className="mt-2 text-muted-foreground">Form bhar kar ya WhatsApp kar sakte ho — your choice!</p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <Button variant="hero" size="lg" asChild>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">WhatsApp Karo</a>
+              <a href="https://wa.me/917464026177" target="_blank" rel="noopener noreferrer">WhatsApp Karo</a>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link to="/payment">Payment Process <ArrowRight className="ml-1 h-4 w-4" /></Link>
