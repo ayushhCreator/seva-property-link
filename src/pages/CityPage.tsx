@@ -27,7 +27,7 @@ export default function CityPage() {
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">{city.description}</p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Button variant="hero" size="lg" asChild>
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/917464026177" target="_blank" rel="noopener noreferrer">
                   WhatsApp Karo
                 </a>
               </Button>

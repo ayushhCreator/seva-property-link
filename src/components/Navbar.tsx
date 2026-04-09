@@ -41,7 +41,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Button variant="hero" size="sm" asChild>
-            <a href="https://wa.me/919876543210?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
               WhatsApp Karo
             </a>
           </Button>
@@ -75,7 +75,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Button variant="hero" className="mt-2 w-full" asChild>
-            <a href="https://wa.me/919876543210?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
               WhatsApp Karo
             </a>
           </Button>

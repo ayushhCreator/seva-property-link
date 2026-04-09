@@ -3,8 +3,8 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const reviews = [
   { name: 'Ajeet Kumar', city: 'Patna', text: 'BhumiSeva ne meri Khatiyan sirf 3 din mein nikal di. Bahut fast service!', rating: 5 },
-  { name: 'Rina Chatterjee', city: 'Kolkata', text: 'Very professional service. Got my deed copy within a week. Highly recommended!', rating: 5 },
-  { name: 'Prashant Deshmukh', city: 'Mumbai', text: 'Excellent rent agreement service. Quick, professional, and hassle-free!', rating: 5 },
+  { name: 'Rina Chatterjee', city: 'Patna', text: 'Very professional service. Got my deed copy within a week. Highly recommended!', rating: 5 },
+  { name: 'Prashant Deshmukh', city: 'Patna', text: 'Excellent rent agreement service. Quick, professional, and hassle-free!', rating: 5 },
   { name: 'Suman Devi', city: 'Patna', text: 'Mutation ka kaam bahut smooth hua. Team bahut helpful thi.', rating: 5 },
 ];
 
