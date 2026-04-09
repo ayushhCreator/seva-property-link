@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { services, cities } from '@/lib/services';
+import { services } from '@/lib/services';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -27,6 +27,7 @@ export default function Navbar() {
             </button>
             <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
               <div className="w-56 rounded-lg border bg-background p-2 shadow-lg">
+                <Link to="/services" className="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">All Services</Link>
                 {services.map(s => (
                   <Link key={s.slug} to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm hover:bg-accent">
                     {s.name}
@@ -35,11 +36,9 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          {cities.map(c => (
-            <Link key={c.slug} to={`/city/${c.slug}`} className="text-sm font-medium text-foreground/80 hover:text-foreground">
-              {c.name}
-            </Link>
-          ))}
+          <Link to="/pricing" className="text-sm font-medium text-foreground/80 hover:text-foreground">Pricing</Link>
+          <Link to="/about" className="text-sm font-medium text-foreground/80 hover:text-foreground">About</Link>
+          <Link to="/contact" className="text-sm font-medium text-foreground/80 hover:text-foreground">Contact</Link>
           <Button variant="hero" size="sm" asChild>
             <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
               WhatsApp Karo
@@ -62,6 +61,7 @@ export default function Navbar() {
           </button>
           {servicesOpen && (
             <div className="pl-4">
+              <Link to="/services" onClick={() => setOpen(false)} className="block py-2 text-sm font-medium text-primary">All Services</Link>
               {services.map(s => (
                 <Link key={s.slug} to={`/services/${s.slug}`} onClick={() => setOpen(false)} className="block py-2 text-sm text-muted-foreground">
                   {s.name}
@@ -69,11 +69,10 @@ export default function Navbar() {
               ))}
             </div>
           )}
-          {cities.map(c => (
-            <Link key={c.slug} to={`/city/${c.slug}`} onClick={() => setOpen(false)} className="block py-3 text-sm font-medium">
-              {c.name}
-            </Link>
-          ))}
+          <Link to="/pricing" onClick={() => setOpen(false)} className="block py-3 text-sm font-medium">Pricing & FAQ</Link>
+          <Link to="/about" onClick={() => setOpen(false)} className="block py-3 text-sm font-medium">About</Link>
+          <Link to="/blog" onClick={() => setOpen(false)} className="block py-3 text-sm font-medium">Blog</Link>
+          <Link to="/contact" onClick={() => setOpen(false)} className="block py-3 text-sm font-medium">Contact</Link>
           <Button variant="hero" className="mt-2 w-full" asChild>
             <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
               WhatsApp Karo
