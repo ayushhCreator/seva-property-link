@@ -61,7 +61,7 @@ export default function AboutPage() {
             </p>
             <div className="grid gap-6 md:grid-cols-3">
               {[
-                { name: 'Ayush Raj', role: 'Founder & CEO', desc: 'Property documentation expert with 8+ years of experience in Bihar land records.' },
+                { name: 'Aditya', role: 'Founder & CEO', desc: 'Property documentation expert with 8+ years of experience in Bihar land records.' },
                 { name: 'Priya Singh', role: 'Operations Head', desc: 'Manages day-to-day service delivery and client communications.' },
                 { name: 'Vikash Kumar', role: 'Legal Advisor', desc: 'Ensures all documents comply with current regulations and legal requirements.' },
               ].map((m, i) => (
