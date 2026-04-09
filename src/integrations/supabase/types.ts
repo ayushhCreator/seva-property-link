@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          city: string
+          co_owners_count: number | null
+          consent: boolean
+          copy_type: string | null
+          created_at: string
+          district: string | null
+          email: string | null
+          id: string
+          khatiyan_number: string | null
+          khesra_plot_no: string | null
+          landlord_name: string | null
+          message: string | null
+          name: string
+          office_city: string | null
+          owner_details: string | null
+          phone: string
+          property_details: string | null
+          registration_number: string | null
+          rent_end_date: string | null
+          rent_start_date: string | null
+          service_type: string
+          state: string | null
+          tenant_name: string | null
+        }
+        Insert: {
+          city: string
+          co_owners_count?: number | null
+          consent?: boolean
+          copy_type?: string | null
+          created_at?: string
+          district?: string | null
+          email?: string | null
+          id?: string
+          khatiyan_number?: string | null
+          khesra_plot_no?: string | null
+          landlord_name?: string | null
+          message?: string | null
+          name: string
+          office_city?: string | null
+          owner_details?: string | null
+          phone: string
+          property_details?: string | null
+          registration_number?: string | null
+          rent_end_date?: string | null
+          rent_start_date?: string | null
+          service_type: string
+          state?: string | null
+          tenant_name?: string | null
+        }
+        Update: {
+          city?: string
+          co_owners_count?: number | null
+          consent?: boolean
+          copy_type?: string | null
+          created_at?: string
+          district?: string | null
+          email?: string | null
+          id?: string
+          khatiyan_number?: string | null
+          khesra_plot_no?: string | null
+          landlord_name?: string | null
+          message?: string | null
+          name?: string
+          office_city?: string | null
+          owner_details?: string | null
+          phone?: string
+          property_details?: string | null
+          registration_number?: string | null
+          rent_end_date?: string | null
+          rent_start_date?: string | null
+          service_type?: string
+          state?: string | null
+          tenant_name?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
