@@ -28,8 +28,12 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold">Cities</h4>
+            <h4 className="mb-3 text-sm font-semibold">Quick Links</h4>
             <ul className="space-y-2">
+              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-foreground">About Us</Link></li>
+              <li><Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground">Pricing & FAQ</Link></li>
+              <li><Link to="/blog" className="text-sm text-muted-foreground hover:text-foreground">Blog</Link></li>
+              <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground">Contact</Link></li>
               {cities.map(c => (
                 <li key={c.slug}>
                   <Link to={`/city/${c.slug}`} className="text-sm text-muted-foreground hover:text-foreground">{c.name}</Link>
@@ -44,10 +48,19 @@ export default function Footer() {
               <li>✉️ info@bhumiseva.co.in</li>
               <li>📍 Patna, Bihar</li>
             </ul>
+            <div className="mt-4">
+              <a href="https://g.page/bhumiseva" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                📌 Google Business Profile
+              </a>
+            </div>
           </div>
         </div>
-        <div className="mt-8 border-t pt-6 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} BhumiSeva. All rights reserved.
+        <div className="mt-8 flex flex-col items-center gap-2 border-t pt-6 text-xs text-muted-foreground md:flex-row md:justify-between">
+          <span>© {new Date().getFullYear()} BhumiSeva. All rights reserved.</span>
+          <div className="flex gap-4">
+            <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-foreground">Terms & Conditions</Link>
+          </div>
         </div>
       </div>
     </footer>
