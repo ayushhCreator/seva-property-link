@@ -57,7 +57,7 @@ export const services: ServiceInfo[] = [
     completedCount: '800+',
     fields: [
       { name: 'registration_number', label: 'Registration Number', placeholder: 'Enter deed registration number', type: 'text', required: true },
-      { name: 'office_city', label: 'Registrar Office City', placeholder: 'Select city', type: 'select', options: ['Patna', 'Kolkata', 'Mumbai'], required: true },
+      { name: 'office_city', label: 'Registrar Office City', placeholder: 'Select city', type: 'select', options: ['Patna'], required: true },
       { name: 'copy_type', label: 'Copy Type Needed', placeholder: 'Select type', type: 'select', options: ['Sale Deed', 'Gift Deed', 'Partition Deed', 'Lease Deed', 'Other'], required: true },
     ],
   },
