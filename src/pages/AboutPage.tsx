@@ -59,21 +59,15 @@ export default function AboutPage() {
             <p className="mb-6 text-muted-foreground">
               BhumiSeva mein experienced property consultants, legal advisors aur tech professionals kaam karte hain. Har team member ka ek hi goal hai — aapke documents jaldi aur sahi tarike se deliver karna.
             </p>
-            <div className="grid gap-6 md:grid-cols-3">
-              {[
-                { name: 'Aditya', role: 'Founder & CEO', desc: 'Property documentation expert with 8+ years of experience in Bihar land records.' },
-                { name: 'Priya Singh', role: 'Operations Head', desc: 'Manages day-to-day service delivery and client communications.' },
-                { name: 'Vikash Kumar', role: 'Legal Advisor', desc: 'Ensures all documents comply with current regulations and legal requirements.' },
-              ].map((m, i) => (
-                <div key={i} className="rounded-xl bg-secondary/50 p-6 text-center">
-                  <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent">
-                    <span className="text-lg font-bold text-accent-foreground">{m.name[0]}</span>
-                  </div>
-                  <h3 className="font-semibold">{m.name}</h3>
-                  <p className="text-xs text-primary">{m.role}</p>
-                  <p className="mt-2 text-xs text-muted-foreground">{m.desc}</p>
+            <div className="flex justify-center">
+              <div className="rounded-xl bg-secondary/50 p-6 text-center">
+                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent">
+                  <span className="text-lg font-bold text-accent-foreground">A</span>
                 </div>
-              ))}
+                <h3 className="font-semibold">Aditya</h3>
+                <p className="text-xs text-primary">Founder & CEO</p>
+                <p className="mt-2 text-xs text-muted-foreground">Property documentation expert with 8+ years of experience in Bihar land records.</p>
+              </div>
             </div>
           </div>
         </section>
