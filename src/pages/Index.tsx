@@ -21,7 +21,7 @@ export default function Index() {
             Expert Property Documentation Services
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-balance text-muted-foreground md:text-lg">
-            Khatiyan, Deed Copies, Rent Agreements — sab online. Fast, secure, and trusted by 500+ clients in Patna, Kolkata & Mumbai.
+            Khatiyan, Deed Copies, Rent Agreements — sab online. Fast, secure, and trusted by 500+ clients in Patna.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button variant="hero" size="lg" asChild>
