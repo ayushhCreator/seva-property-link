@@ -1,0 +1,35 @@
+flowchart TD
+    A[Customer discovers BhumiSeva] --> B{How?}
+    B -->|Google Search| C[Lands on Homepage]
+    B -->|WhatsApp Referral| C
+    B -->|Social Media Ad| C
+
+    C --> D[Browses Services]
+    D --> E[Opens Service Detail Page]
+    E --> F[Fills Multi-Step Enquiry Form]
+
+    F --> G{Step 1: Personal Info}
+    G -->|Name, Phone, City| H{Step 2: Service Details}
+    H -->|Khesra, District, etc.| I[Submits Lead]
+
+    I --> J[Lead saved to Database]
+    J --> K[Customer gets WhatsApp confirmation]
+    K --> L[BhumiSeva team calls within 2hrs]
+
+    L --> M{Payment}
+    M -->|Online| N[Razorpay Checkout]
+    M -->|Cash| O[Pay on delivery]
+
+    N --> P[Payment confirmed]
+    O --> P
+
+    P --> Q[Document Processing Starts]
+    Q --> R[Status: In Progress]
+    R --> S[Document Ready]
+    S --> T[Delivery - Digital + Physical]
+    T --> U[Customer leaves Review]
+
+    style A fill:#065A82,color:#fff
+    style I fill:#028090,color:#fff
+    style N fill:#02C39A,color:#fff
+    style T fill:#065A82,color:#fff

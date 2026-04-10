@@ -1,0 +1,37 @@
+flowchart TD
+    A[Admin logs into Dashboard] --> B[Dashboard Home]
+
+    B --> C[View Today Stats]
+    C --> C1[New Leads Count]
+    C --> C2[Leads by Service Chart]
+    C --> C3[Revenue This Month]
+
+    B --> D[Lead Management]
+    D --> D1[View All Leads Table]
+    D1 --> D2{Filter / Search}
+    D2 -->|By Service| D3[Filtered Results]
+    D2 -->|By Status| D3
+    D2 -->|By Date| D3
+    D2 -->|By Name/Phone| D3
+
+    D3 --> E{Actions on Lead}
+    E --> E1[Change Status]
+    E1 --> E1a[New]
+    E1 --> E1b[Contacted]
+    E1 --> E1c[In Progress]
+    E1 --> E1d[Delivered]
+    E1 --> E1e[Closed]
+
+    E --> E2[Add Internal Notes]
+    E --> E3[Open WhatsApp Chat]
+    E --> E4[View Full Details]
+    E --> E5[Export as CSV]
+
+    B --> F[Settings]
+    F --> F1[Change Password]
+    F --> F2[Notification Preferences]
+
+    style A fill:#1E2761,color:#fff
+    style B fill:#1E2761,color:#fff
+    style D fill:#028090,color:#fff
+    style E fill:#02C39A,color:#fff

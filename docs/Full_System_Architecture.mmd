@@ -1,0 +1,69 @@
+flowchart TB
+    subgraph CUSTOMER["Customer Side"]
+        CU1[Customer visits Website]
+        CU2[Browses Services]
+        CU3[Fills Enquiry Form]
+        CU4[Makes Payment via Razorpay]
+        CU5[Checks Order Status]
+        CU1 --> CU2 --> CU3
+        CU3 --> CU4
+        CU3 --> CU5
+    end
+
+    subgraph BACKEND["Lovable Cloud Backend"]
+        DB[(Database - Leads Table)]
+        AUTH[Auth - Admin Login]
+        EF1[Edge Function: Create Razorpay Order]
+        EF2[Edge Function: Verify Payment]
+        EF3[Edge Function: Send WhatsApp Notification]
+    end
+
+    subgraph ADMIN["Admin Dashboard"]
+        AD1[Login]
+        AD2[Dashboard Stats]
+        AD3[Lead Management]
+        AD4[Change Status + Notes]
+        AD5[CSV Export]
+        AD1 --> AD2
+        AD2 --> AD3
+        AD3 --> AD4
+        AD3 --> AD5
+    end
+
+    subgraph THIRDPARTY["Third-Party Services"]
+        RP[Razorpay - Payments]
+        WA[Interakt/Wati - WhatsApp API]
+        GA[Google Analytics GA4]
+        MP[Meta Pixel]
+        SMS[MSG91 - SMS]
+    end
+
+    CU3 -->|Lead data| DB
+    CU4 -->|Payment request| EF1
+    EF1 -->|Create order| RP
+    RP -->|Payment callback| EF2
+    EF2 -->|Update payment status| DB
+
+    DB -->|New lead trigger| EF3
+    EF3 -->|Send confirmation| WA
+    WA -->|WhatsApp message| CU1
+
+    AD4 -->|Status change| DB
+    DB -->|Status update trigger| EF3
+    EF3 -->|Status notification| WA
+
+    AD3 -->|Read leads| DB
+    AUTH -->|Verify admin| AD1
+
+    CU1 -.->|Page view tracking| GA
+    CU3 -.->|Conversion tracking| GA
+    CU3 -.->|Lead event| MP
+    CU4 -.->|Purchase event| MP
+
+    DB -->|SMS trigger| SMS
+    SMS -->|SMS to customer| CU1
+
+    style CUSTOMER fill:#E8F4F8,color:#000
+    style BACKEND fill:#FFF3E0,color:#000
+    style ADMIN fill:#E8F5E9,color:#000
+    style THIRDPARTY fill:#FCE4EC,color:#000
