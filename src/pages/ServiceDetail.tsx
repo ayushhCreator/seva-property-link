@@ -13,6 +13,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import TrustBar from '@/components/TrustBar';
+import MarqueeBanner from '@/components/MarqueeBanner';
 import { getServiceBySlug, type ServiceField } from '@/lib/services';
 import { submitLead } from '@/lib/supabase';
 
@@ -88,6 +89,8 @@ export default function ServiceDetail() {
                 </li>
               ))}
             </ul>
+
+            <ServiceExtras slug={service.slug} />
           </div>
 
           {/* Form */}
@@ -140,10 +143,13 @@ function EnquiryForm({ service }: { service: { slug: string; name: string; field
         rent_end_date: formData.rent_end_date || undefined,
         property_details: formData.property_details || undefined,
         co_owners_count: formData.co_owners_count ? parseInt(formData.co_owners_count) : undefined,
+        registry_city: formData.registry_city || undefined,
+        registry_year: formData.registry_year || undefined,
+        area_mohalla: formData.area_mohalla || undefined,
         message: formData.message || undefined,
         consent: true,
       });
-      toast.success('Dhanyavaad! Hamare expert jald call karenge.');
+      toast.success('Dhanyavaad! Hum aapko jald contact karenge.');
       setFormData({ name: '', phone: '', email: '', city: '', message: '' });
       setStep(1);
     } catch {
