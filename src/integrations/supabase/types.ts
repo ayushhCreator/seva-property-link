@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       leads: {
         Row: {
+          area_mohalla: string | null
           city: string
           co_owners_count: number | null
           consent: boolean
@@ -34,6 +35,8 @@ export type Database = {
           phone: string
           property_details: string | null
           registration_number: string | null
+          registry_city: string | null
+          registry_year: string | null
           rent_end_date: string | null
           rent_start_date: string | null
           service_type: string
@@ -41,6 +44,7 @@ export type Database = {
           tenant_name: string | null
         }
         Insert: {
+          area_mohalla?: string | null
           city: string
           co_owners_count?: number | null
           consent?: boolean
@@ -59,6 +63,8 @@ export type Database = {
           phone: string
           property_details?: string | null
           registration_number?: string | null
+          registry_city?: string | null
+          registry_year?: string | null
           rent_end_date?: string | null
           rent_start_date?: string | null
           service_type: string
@@ -66,6 +72,7 @@ export type Database = {
           tenant_name?: string | null
         }
         Update: {
+          area_mohalla?: string | null
           city?: string
           co_owners_count?: number | null
           consent?: boolean
@@ -84,6 +91,8 @@ export type Database = {
           phone?: string
           property_details?: string | null
           registration_number?: string | null
+          registry_city?: string | null
+          registry_year?: string | null
           rent_end_date?: string | null
           rent_start_date?: string | null
           service_type?: string

@@ -1,0 +1,4 @@
+ALTER TABLE public.leads 
+ADD COLUMN IF NOT EXISTS registry_city TEXT,
+ADD COLUMN IF NOT EXISTS registry_year TEXT,
+ADD COLUMN IF NOT EXISTS area_mohalla TEXT;
