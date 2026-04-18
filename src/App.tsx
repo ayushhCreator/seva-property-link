@@ -14,6 +14,7 @@ import PricingFaqPage from "./pages/PricingFaqPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPost from "./pages/BlogPost";
 import ContactPage from "./pages/ContactPage";
+import StudioPage from "./pages/StudioPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import NotFound from "./pages/NotFound";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/pricing" element={<PricingFaqPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/studio/*" element={<StudioPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
