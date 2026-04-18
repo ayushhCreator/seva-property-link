@@ -13,6 +13,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import TrustBar from '@/components/TrustBar';
+import MarqueeBanner from '@/components/MarqueeBanner';
 import { getServiceBySlug, type ServiceField } from '@/lib/services';
 import { submitLead } from '@/lib/supabase';
 
@@ -88,6 +89,8 @@ export default function ServiceDetail() {
                 </li>
               ))}
             </ul>
+
+            <ServiceExtras slug={service.slug} />
           </div>
 
           {/* Form */}
@@ -140,10 +143,13 @@ function EnquiryForm({ service }: { service: { slug: string; name: string; field
         rent_end_date: formData.rent_end_date || undefined,
         property_details: formData.property_details || undefined,
         co_owners_count: formData.co_owners_count ? parseInt(formData.co_owners_count) : undefined,
+        registry_city: formData.registry_city || undefined,
+        registry_year: formData.registry_year || undefined,
+        area_mohalla: formData.area_mohalla || undefined,
         message: formData.message || undefined,
         consent: true,
       });
-      toast.success('Dhanyavaad! Hamare expert jald call karenge.');
+      toast.success('Dhanyavaad! Hum aapko jald contact karenge.');
       setFormData({ name: '', phone: '', email: '', city: '', message: '' });
       setStep(1);
     } catch {
@@ -240,4 +246,126 @@ function EnquiryForm({ service }: { service: { slug: string; name: string; field
       </CardContent>
     </Card>
   );
+}
+
+function ServiceExtras({ slug }: { slug: string }) {
+  if (slug === 'partition') {
+    return (
+      <div className="mt-8">
+        <h3 className="mb-3 font-semibold">Service Type</h3>
+        <Card className="border-primary/30">
+          <CardContent className="p-5">
+            <h4 className="mb-2 font-semibold">1. Drafting Only (Without Stamp)</h4>
+            <ul className="space-y-1 text-sm text-muted-foreground">
+              <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Legally drafted partition deed</li>
+              <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Mutual agreement (aapsi batwara) format</li>
+              <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Delivered digitally for your use</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <div className="mt-6 rounded-md border border-amber-400 bg-amber-50 p-4 text-sm text-amber-900">
+          <strong>Important Note:</strong> This is a mutual agreement (aapsi batwara) between co-owners. BhumiSeva provides online drafting and documentation services only. Stamp duty, notary, and court-related charges — if required — are to be handled by the client independently.
+        </div>
+      </div>
+    );
+  }
+
+  if (slug === 'mutation') {
+    return (
+      <div className="mt-8">
+        <MarqueeBanner
+          texts={[
+            '⚠️  Dakhil Kharij (Mutation) is a Government process. BhumiSeva charges only for documentation & process assistance. Estimated service fee: ₹7,000 – ₹15,000. Timeline: approx. 3–6 months depending on Government processing.  •••  ',
+            '⚠️  दाखिल खारिज (म्युटेशन) एक सरकारी प्रक्रिया है। BhumiSeva केवल दस्तावेज़ीकरण और सहायता के लिए शुल्क लेता है। अनुमानित शुल्क: ₹7,000 – ₹15,000। समय: लगभग 3–6 महीने।  •••  ',
+          ]}
+        />
+        <div className="mt-4 rounded-md border border-amber-400 bg-amber-50 p-4 text-sm text-amber-900">
+          <strong>Important Note:</strong> Dakhil Kharij is a Government process. BhumiSeva only charges for documentation and process assistance. Final timeline depends on Government processing and may vary case-to-case.
+        </div>
+      </div>
+    );
+  }
+
+  if (slug === 'khatiyan') {
+    return (
+      <div className="mt-8 space-y-6">
+        <div>
+          <h3 className="mb-3 font-semibold">🌾 Khatiyan (Land Record Document)</h3>
+          <p className="text-sm text-muted-foreground">
+            Khatiyan ek important land record document hota hai jisme kisi zameen ke malik (owner), khata number, aur land details mention hoti hain. Ye document land ownership verify karne, property check karne aur future transaction (buy/sell) se pehle confirmation ke liye use hota hai.
+          </p>
+        </div>
+        <div>
+          <h4 className="mb-2 font-semibold">Ye Document Kis Kaam Aata Hai</h4>
+          <ul className="space-y-1 text-sm">
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Zameen ka ownership check karne ke liye / Verify land ownership</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Property kharidne se pehle verification / Pre-purchase property verification</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Land dispute avoid karne ke liye / Avoid land disputes</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Government record se details confirm karne ke liye / Confirm from official government records</li>
+          </ul>
+        </div>
+        <Card className="border-primary/30">
+          <CardContent className="p-5">
+            <h4 className="mb-2 font-semibold">📄 Service Type: Only Online Digital Copy</h4>
+            <ul className="space-y-1 text-sm text-muted-foreground">
+              <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Fast & simple process</li>
+              <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Verified government record access</li>
+              <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Delivered digitally — no physical copy</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Button variant="hero" asChild>
+          <a href="https://wa.me/917464026177?text=Khatiyan%20nikalwana%20hai" target="_blank" rel="noopener noreferrer">
+            Apna khatiyan nikalwane ke liye WhatsApp par details bheje
+          </a>
+        </Button>
+      </div>
+    );
+  }
+
+  if (slug === 'difference-money') {
+    return (
+      <div className="mt-8 space-y-6">
+        <div className="rounded-lg border border-emerald-300 bg-emerald-50 p-5">
+          <h3 className="mb-3 font-semibold text-emerald-900">📌 Ye Service Kin Logon Ke Liye Hai? / Who Is This For?</h3>
+          <ul className="space-y-2 text-sm text-emerald-900">
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0" /> Jinki property Bihar (kisi bhi district) mein hai / Property is located in Bihar</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0" /> Lekin registry Mumbai, Kolkata ya kisi aur state mein hui thi / But registration was done in Mumbai, Kolkata or another state</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0" /> Registry ki date 25 March 1991 se 2001 ke beech hai / Registration date between 25/03/1991 and 2001</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="mb-3 font-semibold">🧾 BhumiSeva Kya Help Karta Hai?</h3>
+          <ul className="space-y-1 text-sm">
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Case verification & eligibility check</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Required document guidance</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Application & submission support</li>
+            <li className="flex gap-2"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> Process tracking assistance</li>
+          </ul>
+        </div>
+
+        <MarqueeBanner
+          texts={[
+            '⚠️  Difference Money ek government-related tax/penalty process hai jo Bihar sarkar ke rules ke according apply hota hai. BhumiSeva ek independent service provider ke roop mein documentation aur case handling ke liye charges leta hai. Final amount aur process timeline har case ke hisaab se vary karta hai.  •••  ',
+          ]}
+        />
+
+        <div className="rounded-md border border-amber-400 bg-amber-50 p-4 text-sm text-amber-900">
+          <strong>Important Note:</strong> Difference Money ek government-related tax/penalty process hai. BhumiSeva ek independent service provider ke roop mein documentation, case handling aur process assistance ke liye service charges leta hai. Final amount aur process timeline har case ke hisaab se vary karta hai.
+        </div>
+
+        <div className="rounded-lg bg-accent/40 p-5 text-center">
+          <p className="mb-3 font-medium">👉 Apna case verify karne ke liye WhatsApp par details share karein</p>
+          <Button variant="hero" asChild>
+            <a href="https://wa.me/917464026177?text=Difference%20Money%20case%20verify%20karna%20hai" target="_blank" rel="noopener noreferrer">
+              WhatsApp Karo
+            </a>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }

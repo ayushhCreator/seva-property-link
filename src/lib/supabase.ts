@@ -20,6 +20,9 @@ export interface LeadData {
   rent_end_date?: string;
   property_details?: string;
   co_owners_count?: number;
+  registry_city?: string;
+  registry_year?: string;
+  area_mohalla?: string;
   message?: string;
   consent: boolean;
 }

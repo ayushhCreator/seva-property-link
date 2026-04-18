@@ -77,7 +77,15 @@ export default function Index() {
                     <s.icon className="h-5 w-5 text-accent-foreground" />
                   </div>
                   <h3 className="mb-1 font-semibold">{s.name}</h3>
+                  {s.slug === 'difference-money' && (
+                    <p className="mb-1 text-xs font-medium text-primary">Inter-State Registry Case</p>
+                  )}
                   <p className="mb-3 text-sm text-muted-foreground">{s.shortDesc}</p>
+                  {s.slug === 'difference-money' && (
+                    <span className="mb-3 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">
+                      Eligibility: Registry 1991–2001
+                    </span>
+                  )}
                   <div className="mb-4 flex items-center gap-3 text-sm">
                     <span className="font-medium text-primary">From {s.startingPrice}</span>
                     <span className="text-muted-foreground">•</span>
@@ -85,7 +93,7 @@ export default function Index() {
                   </div>
                   <Button variant="hero" size="sm" className="w-full" asChild>
                     <Link to={`/services/${s.slug}`}>
-                      Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                      {s.slug === 'difference-money' ? 'Check Eligibility' : 'Learn More'} <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
                   </Button>
                 </CardContent>
