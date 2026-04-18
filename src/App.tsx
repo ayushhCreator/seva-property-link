@@ -12,6 +12,7 @@ import PaymentPage from "./pages/PaymentPage";
 import AboutPage from "./pages/AboutPage";
 import PricingFaqPage from "./pages/PricingFaqPage";
 import BlogPage from "./pages/BlogPage";
+import BlogPost from "./pages/BlogPost";
 import ContactPage from "./pages/ContactPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/about" element={<AboutPage />} />
           <Route path="/pricing" element={<PricingFaqPage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
