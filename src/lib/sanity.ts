@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+type SanityImageSource = Parameters<ReturnType<typeof imageUrlBuilder>['image']>[0];
 
 export const SANITY_PROJECT_ID = 'ajhhf96y';
 export const SANITY_DATASET = 'production';
