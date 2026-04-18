@@ -1,4 +1,4 @@
-import { FileText, Search, ArrowRightLeft, Home, Users, Scale } from 'lucide-react';
+import { FileText, Search, ArrowRightLeft, Home, Users, Scale, Banknote } from 'lucide-react';
 
 export interface ServiceInfo {
   slug: string;
@@ -70,8 +70,8 @@ export const services: ServiceInfo[] = [
     fullDesc: 'Mutation / Dakhil Kharij is essential to update land ownership records. Our experts handle the full application, follow-up, and delivery so your records reflect the correct ownership.',
     benefits: ['End-to-end processing', 'Government liaison included', 'Status tracking', 'Document preparation'],
     deliverables: ['Mutation Certificate', 'Updated Khatiyan', 'Process Completion Report'],
-    sla: '7-15 Business Days',
-    startingPrice: '₹1,500',
+    sla: '3-6 Months',
+    startingPrice: '₹7,000 – ₹15,000',
     completedCount: '500+',
     fields: [
       { name: 'khatiyan_number', label: 'Current Khatiyan Number', placeholder: 'Enter current Khatiyan number', type: 'text', required: true },
@@ -112,6 +112,31 @@ export const services: ServiceInfo[] = [
     fields: [
       { name: 'property_details', label: 'Property Details', placeholder: 'Property address, area, etc.', type: 'textarea', required: true },
       { name: 'co_owners_count', label: 'Number of Co-Owners', placeholder: 'e.g. 3', type: 'number', required: true },
+    ],
+  },
+  {
+    slug: 'difference-money',
+    name: 'Difference Money',
+    nameHi: 'Inter-State Registry Case',
+    icon: Banknote,
+    shortDesc: 'Bihar mein property hai, registry Mumbai ya Kolkata mein hui thi? Apna difference money case solve karein.',
+    fullDesc: 'Agar aapki property Bihar mein hai lekin registry Mumbai ya Kolkata mein hui thi, to Bihar sarkar ke niyamon ke anusar additional stamp duty (difference money) jama karna zaruri ho sakta hai. BhumiSeva aapki is process mein madad karta hai.',
+    benefits: [
+      'Case verification & eligibility check',
+      'Required document guidance',
+      'Application & submission support',
+      'Process tracking assistance',
+    ],
+    deliverables: ['Eligibility Report', 'Application Filing', 'Case Tracking Updates'],
+    sla: 'Case-by-case basis',
+    startingPrice: 'Case-based',
+    completedCount: '50+',
+    fields: [
+      { name: 'district', label: 'Property District (Bihar)', placeholder: 'e.g. Patna, Gaya, Ara', type: 'text', required: true },
+      { name: 'area_mohalla', label: 'Area / Mohalla', placeholder: 'Property area / mohalla', type: 'text', required: true },
+      { name: 'registry_city', label: 'Registry City', placeholder: 'Select city', type: 'select', options: ['Mumbai', 'Kolkata', 'Other'], required: true },
+      { name: 'registry_year', label: 'Approximate Registry Year', placeholder: 'Select year', type: 'select', options: ['1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001'], required: true },
+      { name: 'message', label: 'Brief Description of Case', placeholder: 'e.g. Meri zameen Patna mein hai, registry 1995 mein Mumbai mein hui thi...', type: 'textarea', required: false },
     ],
   },
 ];
