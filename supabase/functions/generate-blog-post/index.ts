@@ -8,6 +8,7 @@ const corsHeaders = {
 interface GenerateBody {
   topic: string;
   language?: "hindi-english" | "english" | "hindi";
+  mode?: "bhumiseva" | "free";
 }
 
 Deno.serve(async (req) => {
@@ -33,9 +34,15 @@ Deno.serve(async (req) => {
         ? "Write in Hindi (Devanagari script)."
         : "Write in conversational Hinglish (Hindi-English mix in Roman script) suitable for Indian property owners in Patna/Bihar.";
 
-    const systemPrompt = `You are an expert SEO blog writer for BhumiSeva — a property documentation service in Patna, India (services: Khatiyan, Mutation, Registry copies, Rent Agreement, Difference Money). ${langInstruction} Generate trustworthy, helpful, well-structured content. Always return valid JSON via the provided tool.`;
+    const mode = body.mode ?? "bhumiseva";
 
-    const userPrompt = `Write a complete SEO-optimised blog post for the topic: "${body.topic}".\nRequirements:\n- 800-1200 words\n- 1 H1 (the title), 3-5 H2 sections, optional H3s\n- Practical, actionable advice for property owners\n- Mention BhumiSeva naturally where helpful (don't oversell)\n- Friendly expert tone`;
+    const systemPrompt = mode === "free"
+      ? `You are an expert SEO blog writer. ${langInstruction} Write on whatever topic the user requests, accurately and helpfully. Generate well-structured, trustworthy content. Always return valid JSON via the provided tool.`
+      : `You are an expert SEO blog writer for BhumiSeva — a property documentation service in Patna, India (services: Khatiyan, Mutation, Registry copies, Rent Agreement, Difference Money). ${langInstruction} Generate trustworthy, helpful, well-structured content focused on property owners in Bihar. Always return valid JSON via the provided tool.`;
+
+    const userPrompt = mode === "free"
+      ? `Write a complete SEO-optimised blog post for the topic: "${body.topic}".\nRequirements:\n- 800-1200 words\n- 1 H1 (the title), 3-5 H2 sections, optional H3s\n- Accurate, practical, actionable content on the exact topic requested\n- Friendly expert tone\n- Do NOT mention BhumiSeva unless directly relevant to the topic`
+      : `Write a complete SEO-optimised blog post for the topic: "${body.topic}".\nRequirements:\n- 800-1200 words\n- 1 H1 (the title), 3-5 H2 sections, optional H3s\n- Practical, actionable advice for property owners in Patna/Bihar\n- Mention BhumiSeva naturally where helpful (don't oversell)\n- Friendly expert tone`;
 
     const aiResp = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
