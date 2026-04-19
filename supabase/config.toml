@@ -1,1 +1,10 @@
 project_id = "sugyccacairrdxnyoehm"
+
+[functions.generate-blog-post]
+verify_jwt = false
+
+[functions.seo-autofill]
+verify_jwt = false
+
+[functions.auto-publish-posts]
+verify_jwt = false

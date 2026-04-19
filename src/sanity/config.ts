@@ -2,6 +2,7 @@ import { defineConfig, defineType, defineField } from 'sanity';
 import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
 import { SANITY_PROJECT_ID, SANITY_DATASET } from '@/lib/sanity';
+import { GenerateWithAIAction, AutofillSeoAction } from './actions';
 
 const author = defineType({
   name: 'author',
@@ -62,4 +63,10 @@ export const sanityConfig = defineConfig({
   basePath: '/studio',
   plugins: [deskTool(), visionTool()],
   schema: { types: [post, author] },
+  document: {
+    actions: (prev, context) => {
+      if (context.schemaType !== 'post') return prev;
+      return [GenerateWithAIAction, AutofillSeoAction, ...prev];
+    },
+  },
 });
