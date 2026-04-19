@@ -42,6 +42,7 @@ interface PatchOp { patch: { execute: (patches: unknown[]) => void } }
 export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentActionProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [topic, setTopic] = useState('');
+  const [mode, setMode] = useState<'bhumiseva' | 'free'>('bhumiseva');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const ops = useDocumentOperation(props.id, props.type) as unknown as PatchOp;
@@ -59,7 +60,7 @@ export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentAct
           'Content-Type': 'application/json',
           Authorization: `Bearer ${SUPABASE_ANON}`,
         },
-        body: JSON.stringify({ topic: topic.trim() }),
+        body: JSON.stringify({ topic: topic.trim(), mode }),
       });
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || 'Generation failed');
@@ -91,7 +92,7 @@ export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentAct
     } finally {
       setLoading(false);
     }
-  }, [topic, ops, toast, props]);
+  }, [topic, mode, ops, toast, props]);
 
   return {
     label: 'Generate with AI',
@@ -106,12 +107,48 @@ export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentAct
       },
       content: (
         <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <label style={{ fontSize: 13, fontWeight: 500 }}>Writing mode</label>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button
+              type="button"
+              onClick={() => setMode('bhumiseva')}
+              disabled={loading}
+              style={{
+                flex: 1, padding: '8px 12px', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                border: mode === 'bhumiseva' ? '2px solid #28a745' : '1px solid #ccc',
+                background: mode === 'bhumiseva' ? '#e9f7ef' : 'white',
+                color: mode === 'bhumiseva' ? '#1a7a36' : '#333',
+              }}
+            >
+              🏠 BhumiSeva (property docs)
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode('free')}
+              disabled={loading}
+              style={{
+                flex: 1, padding: '8px 12px', borderRadius: 6, fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                border: mode === 'free' ? '2px solid #28a745' : '1px solid #ccc',
+                background: mode === 'free' ? '#e9f7ef' : 'white',
+                color: mode === 'free' ? '#1a7a36' : '#333',
+              }}
+            >
+              ✍️ Free (any topic)
+            </button>
+          </div>
+          <p style={{ fontSize: 11, color: '#666', margin: '0 0 4px 0' }}>
+            {mode === 'bhumiseva'
+              ? 'AI will write about property documentation in Patna and naturally mention BhumiSeva.'
+              : 'AI will write on any topic you give — no BhumiSeva branding inserted.'}
+          </p>
           <label style={{ fontSize: 13, fontWeight: 500 }}>Blog topic / keyword</label>
           <input
             type="text"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="e.g. How to apply for Khatiyan in Patna online"
+            placeholder={mode === 'bhumiseva'
+              ? 'e.g. How to apply for Khatiyan in Patna online'
+              : 'e.g. How Sanity.io helps content teams publish faster'}
             style={{ padding: '10px 12px', border: '1px solid #ccc', borderRadius: 6, fontSize: 14 }}
             disabled={loading}
           />
