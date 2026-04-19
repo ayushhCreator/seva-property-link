@@ -209,6 +209,70 @@ The site **doesn't yet** track blog analytics. You have 3 options (pick one in n
 **Realistic monthly running cost (current state):** ₹0–₹500.
 **With WhatsApp + payments live:** ₹1,000–₹3,000/mo + 2% on transactions.
 
+### 4.4.1 Platform-by-Platform Cost Breakdown (Detailed)
+
+Use this when the client asks "where exactly is my money going each month?"
+
+#### 🟦 Lovable (Hosting + Editor)
+- **Free plan:** ₹0/mo — 5 daily credits (capped 30/mo). Enough for very small edits only.
+- **Pro plan:** ~$25/mo (~₹2,100/mo) — 100 monthly credits + custom domain + remove Lovable badge. **Recommended for active projects.**
+- **Business plan:** ~$50+/mo — for teams (SSO, roles). Not needed for BhumiSeva right now.
+- **What credits are used for:** Every AI edit/build message in Lovable editor consumes credits. Plan-mode = 1 credit/message; build-mode = usage-based.
+- **When to upgrade:** When you start asking for new features regularly or want to remove the Lovable badge.
+
+#### 🟩 Lovable Cloud (Database + Auth + Edge Functions + Storage)
+- **Free included balance:** **$25/mo** Cloud balance (resets monthly, valid until early 2026).
+- **What it covers (free tier — more than enough for current traffic):**
+  - PostgreSQL database (leads table, future tables)
+  - Authentication (when admin login is built)
+  - Edge functions: `generate-blog-post`, `seo-autofill`, `auto-publish-posts`
+  - File storage (when needed for documents/images)
+  - Automated daily backups
+- **Realistic spend at current scale (≤500 leads/mo):** ₹0 (within free $25).
+- **At scale (5,000+ leads/mo, heavy traffic):** ~$10–$30/mo (~₹850–₹2,500/mo).
+
+#### 🟨 Lovable AI Gateway (Powers "Generate with AI" + "Auto-fill SEO")
+- **Free included balance:** **$1/mo** AI balance (resets monthly, valid until early 2026).
+- **Model in use:** `google/gemini-2.5-flash` (fast + cheap).
+- **Cost per blog post generated:** ~₹0.50 – ₹2 (depending on length).
+- **Cost per SEO auto-fill:** ~₹0.20 – ₹0.50.
+- **Realistic spend (10–20 blog posts/mo):** ₹0 — well within free $1.
+- **No API key needed** — billed against your Lovable workspace balance automatically.
+
+#### 🟥 Sanity.io (Blog CMS at /studio)
+- **Free plan:** ₹0/mo — 3 users, 10,000 documents, 10 GB asset bandwidth, 5 GB asset storage. **More than enough for BhumiSeva for years.**
+- **Growth plan (only if you outgrow free):** $15/mo (~₹1,250/mo) per project.
+- **Realistic spend:** ₹0/mo for the foreseeable future.
+
+#### 🟪 Hostinger (Domain only — hosting is on Lovable)
+- **Domain (.com):** ~₹700–₹1,000/year (~₹60–₹85/mo amortized).
+- **You already own this** — no hosting plan needed from Hostinger.
+
+#### 🟧 Razorpay (When payments go live in Phase 2)
+- **Setup fee:** ₹0.
+- **Monthly fee:** ₹0.
+- **Per-transaction:** 2% on UPI/cards/netbanking. Example: ₹500 service → ~₹10 to Razorpay.
+- **Settlement:** T+2 days to your bank.
+
+#### 🟫 WhatsApp Business API (When auto-notifications go live in Phase 2)
+- **Provider options:** Interakt (~₹999/mo) or Wati (~₹2,499/mo).
+- **Per-message cost:** Meta charges ~₹0.30–₹0.80 per business-initiated conversation. Service replies (within 24h window) often free.
+- **Realistic spend (200 leads/mo):** ₹999 (Interakt) + ~₹100–₹200 message charges = ~₹1,200/mo.
+
+#### 🟦 Google Analytics 4 + Search Console (When wired up)
+- **Cost:** ₹0/mo forever. Free from Google.
+
+#### Summary Table — Monthly Cost by Phase
+
+| Phase | Lovable | Cloud | AI | Sanity | Domain | WhatsApp | Razorpay | **Total /mo** |
+|---|---|---|---|---|---|---|---|---|
+| **Today (live)** | ₹0 (free) or ₹2,100 (Pro) | ₹0 | ₹0 | ₹0 | ₹70 | — | — | **₹70 – ₹2,170** |
+| **+ Analytics added** | same | ₹0 | ₹0 | ₹0 | ₹70 | — | — | **same** |
+| **+ Phase 2 (Admin + Payments + WhatsApp)** | ₹2,100 | ₹0–₹500 | ₹0–₹100 | ₹0 | ₹70 | ₹1,200 | 2% per txn | **~₹3,500–₹4,000/mo + 2% txn** |
+| **At scale (5k+ leads/mo)** | ₹2,100 | ~₹2,000 | ~₹200 | ₹0 | ₹70 | ~₹2,500 | 2% per txn | **~₹6,800/mo + 2% txn** |
+
+> **Bottom line for the client:** Today the system runs on essentially **₹0/mo** (just the domain). Even at full scale with all add-ons, it stays under **₹7,000/mo + 2% on transactions** — which is a fraction of hiring even one part-time staff member.
+
 ### 4.5 Key Files & Locations (for any future developer)
 
 - Customer pages: `src/pages/`
