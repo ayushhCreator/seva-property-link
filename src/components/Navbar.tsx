@@ -37,6 +37,7 @@ export default function Navbar() {
             </div>
           </div>
           <Link to="/pricing" className="text-sm font-medium text-foreground/80 hover:text-foreground">Pricing</Link>
+          <Link to="/blog" className="text-sm font-medium text-foreground/80 hover:text-foreground">Blog</Link>
           <Link to="/about" className="text-sm font-medium text-foreground/80 hover:text-foreground">About</Link>
           <Link to="/contact" className="text-sm font-medium text-foreground/80 hover:text-foreground">Contact</Link>
           <Button variant="hero" size="sm" asChild>

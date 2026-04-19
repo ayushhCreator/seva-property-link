@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import TrustBar from '@/components/TrustBar';
 import ReviewsSection from '@/components/ReviewsSection';
+import BlogPreview from '@/components/BlogPreview';
 import { services } from '@/lib/services';
 
 export default function Index() {
@@ -102,6 +103,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Blog Preview */}
+      <BlogPreview />
 
       {/* Reviews */}
       <ReviewsSection />
