@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import type { DocumentActionComponent, DocumentActionProps, SanityDocument } from 'sanity';
-import { useToast } from 'sanity';
+import { useDocumentOperation } from 'sanity';
+import { useToast } from '@sanity/ui';
 import { SparklesIcon, SearchIcon } from '@sanity/icons';
 
 const SUPABASE_URL = 'https://sugyccacairrdxnyoehm.supabase.co';
@@ -36,11 +37,61 @@ function blocksToPlainText(body: unknown): string {
     .join('\n\n');
 }
 
+interface PatchOp { patch: { execute: (patches: unknown[]) => void } }
+
 export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentActionProps) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [topic, setTopic] = useState('');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const ops = useDocumentOperation(props.id, props.type) as unknown as PatchOp;
+
+  const handleGenerate = useCallback(async () => {
+    if (topic.trim().length < 3) {
+      toast.push({ status: 'warning', title: 'Topic too short' });
+      return;
+    }
+    setLoading(true);
+    try {
+      const resp = await fetch(`${SUPABASE_URL}/functions/v1/generate-blog-post`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${SUPABASE_ANON}`,
+        },
+        body: JSON.stringify({ topic: topic.trim() }),
+      });
+      const data = await resp.json();
+      if (!resp.ok) throw new Error(data.error || 'Generation failed');
+      const generated = data as GeneratedPost;
+
+      ops.patch.execute([
+        { set: { title: generated.title } },
+        { set: { slug: { _type: 'slug', current: generated.slug } } },
+        { set: { excerpt: generated.excerpt } },
+        { set: { tags: generated.tags } },
+        { set: { body: generated.body } },
+        { setIfMissing: { publishedAt: new Date().toISOString() } },
+      ]);
+
+      toast.push({
+        status: 'success',
+        title: 'Blog post generated!',
+        description: 'Review the draft and publish when ready.',
+      });
+      setDialogOpen(false);
+      setTopic('');
+      props.onComplete();
+    } catch (err) {
+      toast.push({
+        status: 'error',
+        title: 'Generation failed',
+        description: err instanceof Error ? err.message : 'Unknown error',
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [topic, ops, toast, props]);
 
   return {
     label: 'Generate with AI',
@@ -61,65 +112,11 @@ export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentAct
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
             placeholder="e.g. How to apply for Khatiyan in Patna online"
-            style={{
-              padding: '10px 12px',
-              border: '1px solid #ccc',
-              borderRadius: 6,
-              fontSize: 14,
-            }}
+            style={{ padding: '10px 12px', border: '1px solid #ccc', borderRadius: 6, fontSize: 14 }}
             disabled={loading}
           />
           <button
-            onClick={async () => {
-              if (topic.trim().length < 3) {
-                toast.push({ status: 'warning', title: 'Topic too short' });
-                return;
-              }
-              setLoading(true);
-              try {
-                const resp = await fetch(`${SUPABASE_URL}/functions/v1/generate-blog-post`, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${SUPABASE_ANON}`,
-                  },
-                  body: JSON.stringify({ topic: topic.trim() }),
-                });
-                const data = await resp.json();
-                if (!resp.ok) throw new Error(data.error || 'Generation failed');
-                const generated = data as GeneratedPost;
-
-                props.patch.execute([
-                  { set: { title: generated.title } },
-                  { set: { slug: { _type: 'slug', current: generated.slug } } },
-                  { set: { excerpt: generated.excerpt } },
-                  { set: { tags: generated.tags } },
-                  { set: { body: generated.body } },
-                  {
-                    setIfMissing: {
-                      publishedAt: new Date().toISOString(),
-                    },
-                  },
-                ]);
-
-                toast.push({
-                  status: 'success',
-                  title: 'Blog post generated!',
-                  description: 'Review the draft and publish when ready.',
-                });
-                setDialogOpen(false);
-                setTopic('');
-                props.onComplete();
-              } catch (err) {
-                toast.push({
-                  status: 'error',
-                  title: 'Generation failed',
-                  description: err instanceof Error ? err.message : 'Unknown error',
-                });
-              } finally {
-                setLoading(false);
-              }
-            }}
+            onClick={handleGenerate}
             disabled={loading}
             style={{
               padding: '10px 14px',
@@ -146,6 +143,7 @@ export const GenerateWithAIAction: DocumentActionComponent = (props: DocumentAct
 export const AutofillSeoAction: DocumentActionComponent = (props: DocumentActionProps) => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const ops = useDocumentOperation(props.id, props.type) as unknown as PatchOp;
   const doc = (props.draft || props.published) as SanityDocument | null;
 
   return {
@@ -172,7 +170,7 @@ export const AutofillSeoAction: DocumentActionComponent = (props: DocumentAction
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'SEO autofill failed');
 
-        props.patch.execute([
+        ops.patch.execute([
           { set: { excerpt: data.excerpt } },
           { set: { tags: data.tags } },
         ]);
