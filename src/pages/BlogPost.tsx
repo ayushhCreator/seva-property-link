@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { PortableText, type PortableTextComponents } from '@portabletext/react';
+import AdSlot from '@/components/AdSlot';
 import { ArrowLeft, Calendar } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -104,6 +105,8 @@ export default function BlogPost() {
           <div className="prose prose-neutral max-w-none">
             {post.body && <PortableText value={post.body as never} components={portableComponents} />}
           </div>
+
+          <AdSlot className="mt-8" />
         </article>
       </main>
       <Footer />
