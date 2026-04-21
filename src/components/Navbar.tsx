@@ -45,8 +45,7 @@ export default function Navbar() {
             </button>
             <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
               <div className="w-56 rounded-lg border bg-background p-2 shadow-lg">
-                <Link to="/services" className="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent">All Services</Link>
-                {services.map(s => (
+                {services.filter(s => s.slug === 'khatiyan').map(s => (
                   <Link key={s.slug} to={`/services/${s.slug}`} className="block rounded-md px-3 py-2 text-sm hover:bg-accent">
                     {s.name}
                   </Link>
@@ -84,8 +83,7 @@ export default function Navbar() {
           </button>
           {servicesOpen && (
             <div className="pl-4">
-              <Link to="/services" onClick={() => setOpen(false)} className="block py-2 text-sm font-medium text-primary">All Services</Link>
-              {services.map(s => (
+              {services.filter(s => s.slug === 'khatiyan').map(s => (
                 <Link key={s.slug} to={`/services/${s.slug}`} onClick={() => setOpen(false)} className="block py-2 text-sm text-muted-foreground">
                   {s.name}
                 </Link>
