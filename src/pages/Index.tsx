@@ -41,6 +41,39 @@ export default function Index() {
       {/* Trust Bar */}
       <TrustBar />
 
+      {/* Services — now directly below hero, only Khatiyan */}
+      <section className="bg-secondary/30 py-16">
+        <div className="container">
+          <div className="mb-10 text-center">
+            <h2 className="text-2xl font-bold md:text-3xl">Our Services</h2>
+            <p className="mt-2 text-muted-foreground">Complete property documentation, simplified.</p>
+          </div>
+          <div className="mx-auto max-w-md">
+            {services.filter(s => s.slug === 'khatiyan').map(s => (
+              <Card key={s.slug} className="group transition-shadow hover:shadow-md">
+                <CardContent className="p-6">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
+                    <s.icon className="h-5 w-5 text-accent-foreground" />
+                  </div>
+                  <h3 className="mb-1 font-semibold">{s.name}</h3>
+                  <p className="mb-3 text-sm text-muted-foreground">{s.shortDesc}</p>
+                  <div className="mb-4 flex items-center gap-3 text-sm">
+                    <span className="font-medium text-primary">From {s.startingPrice}</span>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-muted-foreground">{s.completedCount} done</span>
+                  </div>
+                  <Button variant="hero" size="sm" className="w-full" asChild>
+                    <Link to={`/services/${s.slug}`}>
+                      Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why BhumiSeva */}
       <section className="container py-16">
         <div className="mb-10 text-center">
@@ -61,47 +94,6 @@ export default function Index() {
               <p className="text-sm text-muted-foreground">{item.desc}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="bg-secondary/30 py-16">
-        <div className="container">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold md:text-3xl">Our Services</h2>
-            <p className="mt-2 text-muted-foreground">Complete property documentation, simplified.</p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map(s => (
-              <Card key={s.slug} className="group transition-shadow hover:shadow-md">
-                <CardContent className="p-6">
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
-                    <s.icon className="h-5 w-5 text-accent-foreground" />
-                  </div>
-                  <h3 className="mb-1 font-semibold">{s.name}</h3>
-                  {s.slug === 'difference-money' && (
-                    <p className="mb-1 text-xs font-medium text-primary">Inter-State Registry Case</p>
-                  )}
-                  <p className="mb-3 text-sm text-muted-foreground">{s.shortDesc}</p>
-                  {s.slug === 'difference-money' && (
-                    <span className="mb-3 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">
-                      Eligibility: Registry 1991–2001
-                    </span>
-                  )}
-                  <div className="mb-4 flex items-center gap-3 text-sm">
-                    <span className="font-medium text-primary">From {s.startingPrice}</span>
-                    <span className="text-muted-foreground">•</span>
-                    <span className="text-muted-foreground">{s.completedCount} done</span>
-                  </div>
-                  <Button variant="hero" size="sm" className="w-full" asChild>
-                    <Link to={`/services/${s.slug}`}>
-                      {s.slug === 'difference-money' ? 'Check Eligibility' : 'Learn More'} <ArrowRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
 
