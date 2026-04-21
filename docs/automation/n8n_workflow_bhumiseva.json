@@ -1,0 +1,120 @@
+{
+  "name": "Daily Blog — BhumiSeva",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 30 1 * * *"
+            }
+          ]
+        }
+      },
+      "id": "node-schedule",
+      "name": "Daily 7am IST",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pick today's topic from a rotating niche list.\n// Replace / extend this list with your own keywords or wire a Google Trends node before this.\nconst topics = [\n  'Patna mein khatiyan online kaise nikale 2026',\n  'Bihar mutation process step by step guide',\n  'Registry ki nakal kaise prapt kare Patna',\n  'Rent agreement registration Patna full process',\n  'Difference money calculation Bihar property',\n  'Jamabandi check karne ka tarika Bihar',\n  'Dakhil kharij online application Bihar',\n  'Bhulekh Bihar portal complete guide',\n  'Property mutation documents required Patna',\n  'Online land records Bihar 2026 update'\n];\nconst day = new Date().getDate();\nconst topic = topics[day % topics.length];\nreturn [{ json: { topic, language: 'hindi-english', mode: 'bhumiseva' } }];"
+      },
+      "id": "node-topic",
+      "name": "Topic Picker",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ai.gateway.lovable.dev/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"google/gemini-3-flash-preview\",\n  \"messages\": [\n    { \"role\": \"system\", \"content\": \"You are an expert SEO blog writer for BhumiSeva, a property documentation service in Patna, Bihar (Khatiyan, Mutation, Registry copies, Rent Agreement, Difference Money). Write in conversational Hinglish in Roman script. Trustworthy, practical, helpful. Always return valid JSON via the provided tool.\" },\n    { \"role\": \"user\", \"content\": \"Write a complete SEO blog post for the topic: '{{$json.topic}}'. 800-1200 words. 1 H1 (title), 3-5 H2 sections, optional H3s. Mention BhumiSeva naturally where helpful.\" }\n  ],\n  \"tools\": [{\n    \"type\": \"function\",\n    \"function\": {\n      \"name\": \"create_blog_post\",\n      \"description\": \"Return a structured SEO blog post.\",\n      \"parameters\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"title\": { \"type\": \"string\" },\n          \"slug\":  { \"type\": \"string\" },\n          \"excerpt\": { \"type\": \"string\" },\n          \"tags\": { \"type\": \"array\", \"items\": { \"type\": \"string\" } },\n          \"sections\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"type\": { \"type\": \"string\", \"enum\": [\"h2\",\"h3\",\"paragraph\"] },\n                \"text\": { \"type\": \"string\" }\n              },\n              \"required\": [\"type\",\"text\"]\n            }\n          }\n        },\n        \"required\": [\"title\",\"slug\",\"excerpt\",\"tags\",\"sections\"]\n      }\n    }\n  }],\n  \"tool_choice\": { \"type\": \"function\", \"function\": { \"name\": \"create_blog_post\" } }\n}",
+        "options": { "timeout": 120000 }
+      },
+      "id": "node-ai",
+      "name": "Generate with AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300],
+      "credentials": {
+        "httpHeaderAuth": { "id": "REPLACE_WITH_LOVABLE_AI_CRED_ID", "name": "Lovable AI" }
+      },
+      "notes": "SWAP MODEL HERE: change url, credential and body.model to switch between Lovable AI / Anthropic / OpenAI / Ollama."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Convert AI response → Sanity Portable Text + build the create mutation\nconst resp = $input.first().json;\nconst args = JSON.parse(resp.choices[0].message.tool_calls[0].function.arguments);\n\nconst rid = () => Math.random().toString(36).slice(2, 14);\n\nconst body = args.sections.map(s => ({\n  _type: 'block',\n  _key: rid(),\n  style: s.type === 'h2' ? 'h2' : s.type === 'h3' ? 'h3' : 'normal',\n  markDefs: [],\n  children: [{ _type: 'span', _key: rid(), text: s.text, marks: [] }]\n}));\n\n// Schedule for tomorrow 9am IST (= 03:30 UTC)\nconst pub = new Date();\npub.setUTCDate(pub.getUTCDate() + 1);\npub.setUTCHours(3, 30, 0, 0);\n\nconst doc = {\n  _type: 'post',\n  _id: 'drafts.' + rid() + rid(),\n  title: args.title,\n  slug: { _type: 'slug', current: args.slug },\n  excerpt: args.excerpt,\n  tags: args.tags,\n  body,\n  publishedAt: pub.toISOString()\n};\n\nreturn [{ json: { mutations: [{ create: doc }], _meta: { title: args.title, slug: args.slug } } }];"
+      },
+      "id": "node-format",
+      "name": "Format for Sanity",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://YOUR_SANITY_PROJECT_ID.api.sanity.io/v2024-01-01/data/mutate/production",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"mutations\": {{ JSON.stringify($json.mutations) }}\n}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "node-sanity",
+      "name": "Sanity Write",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1180, 300],
+      "credentials": {
+        "httpHeaderAuth": { "id": "REPLACE_WITH_SANITY_CRED_ID", "name": "Sanity BhumiSeva" }
+      },
+      "notes": "Replace YOUR_SANITY_PROJECT_ID in the URL with your actual Sanity project ID (see src/lib/sanity.ts)."
+    },
+    {
+      "parameters": {
+        "chatId": "REPLACE_WITH_YOUR_CHAT_ID",
+        "text": "=✅ New BhumiSeva draft created\n\n*{{ $('Format for Sanity').item.json._meta.title }}*\n\nSlug: `{{ $('Format for Sanity').item.json._meta.slug }}`\nReview at /studio before auto-publish tomorrow 9 AM.",
+        "additionalFields": { "parse_mode": "Markdown" }
+      },
+      "id": "node-telegram",
+      "name": "Telegram Notify",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1420, 300],
+      "credentials": {
+        "telegramApi": { "id": "REPLACE_WITH_TELEGRAM_CRED_ID", "name": "Telegram Bot" }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 7am IST":   { "main": [[{ "node": "Topic Picker",      "type": "main", "index": 0 }]] },
+    "Topic Picker":    { "main": [[{ "node": "Generate with AI",  "type": "main", "index": 0 }]] },
+    "Generate with AI":{ "main": [[{ "node": "Format for Sanity", "type": "main", "index": 0 }]] },
+    "Format for Sanity":{"main": [[{ "node": "Sanity Write",      "type": "main", "index": 0 }]] },
+    "Sanity Write":    { "main": [[{ "node": "Telegram Notify",   "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1", "timezone": "Asia/Kolkata" },
+  "tags": ["bhumiseva", "blog-automation"]
+}
