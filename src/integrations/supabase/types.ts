@@ -17,6 +17,7 @@ export type Database = {
       leads: {
         Row: {
           area_mohalla: string | null
+          block: string | null
           city: string
           co_owners_count: number | null
           consent: boolean
@@ -29,9 +30,11 @@ export type Database = {
           khesra_plot_no: string | null
           landlord_name: string | null
           message: string | null
+          mouza: string | null
           name: string
           office_city: string | null
           owner_details: string | null
+          owner_name: string | null
           phone: string
           property_details: string | null
           registration_number: string | null
@@ -42,9 +45,11 @@ export type Database = {
           service_type: string
           state: string | null
           tenant_name: string | null
+          thana: string | null
         }
         Insert: {
           area_mohalla?: string | null
+          block?: string | null
           city: string
           co_owners_count?: number | null
           consent?: boolean
@@ -57,9 +62,11 @@ export type Database = {
           khesra_plot_no?: string | null
           landlord_name?: string | null
           message?: string | null
+          mouza?: string | null
           name: string
           office_city?: string | null
           owner_details?: string | null
+          owner_name?: string | null
           phone: string
           property_details?: string | null
           registration_number?: string | null
@@ -70,9 +77,11 @@ export type Database = {
           service_type: string
           state?: string | null
           tenant_name?: string | null
+          thana?: string | null
         }
         Update: {
           area_mohalla?: string | null
+          block?: string | null
           city?: string
           co_owners_count?: number | null
           consent?: boolean
@@ -85,9 +94,11 @@ export type Database = {
           khesra_plot_no?: string | null
           landlord_name?: string | null
           message?: string | null
+          mouza?: string | null
           name?: string
           office_city?: string | null
           owner_details?: string | null
+          owner_name?: string | null
           phone?: string
           property_details?: string | null
           registration_number?: string | null
@@ -98,6 +109,7 @@ export type Database = {
           service_type?: string
           state?: string | null
           tenant_name?: string | null
+          thana?: string | null
         }
         Relationships: []
       }
