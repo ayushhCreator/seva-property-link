@@ -1,4 +1,5 @@
 import { supabase } from '@/integrations/supabase/client';
+import { trackEvent } from '@/lib/analytics';
 
 export interface LeadData {
   name: string;
@@ -34,4 +35,5 @@ export interface LeadData {
 export async function submitLead(data: LeadData) {
   const { error } = await supabase.from('leads').insert([data as any]);
   if (error) throw error;
+  trackEvent('lead_submit', { service_type: data.service_type, city: data.city });
 }

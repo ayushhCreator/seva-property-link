@@ -19,19 +19,22 @@
 - Blog system with Sanity Studio (`/studio`) + AI blog generation edge functions (`generate-blog-post`, `auto-publish-posts`, `seo-autofill`)
 - Multilingual scaffolding via `LanguageContext`
 - Design system: Success Green primary, Inter typography, semantic HSL tokens
+- **Admin Console (Phase 2 — DONE)**:
+  - `/admin/login` email + password (signup disabled, HIBP enabled, auto-confirm on)
+  - `user_roles` table + `app_role` enum + `has_role()` security definer
+  - `profiles` table auto-created on signup via trigger
+  - `/admin` dashboard: today/total/in-progress/delivered cards + leads-by-service bar chart + leads-by-status pie chart
+  - `/admin/leads`: searchable, filterable table; status workflow; internal notes; WhatsApp quick-link; CSV export; full lead detail sheet
+  - Sidebar link to `/studio` (Sanity) for blog management
+  - RLS: only admins/moderators can view/update leads; admins manage roles
+- **Analytics scaffolding** (`src/lib/analytics.ts`): GA4 + Meta Pixel snippets with placeholder IDs and `trackEvent('lead_submit')` already wired into `submitLead()`
 
 ### 🛠️ Next to build (payments excluded for now)
-1. **Admin Dashboard (Phase 2 — top priority)**
-   - Email/password login + protected routes (Lovable Cloud Auth)
-   - `user_roles` table + `has_role()` security definer function (admin / moderator)
-   - Lead management: table view, filters (service/status/date), search (name/phone), status workflow (New → Contacted → In Progress → Delivered → Closed), internal notes, WhatsApp quick link, CSV export
-   - Dashboard home: today's leads, total leads, leads-by-service chart, leads-by-status chart
-   - Schema additions on `leads`: `status`, `admin_notes`, `assigned_to`
-2. **Customer order tracking** — public lookup by phone + order ID showing current status
-3. **WhatsApp automation** — auto-confirmation message on lead submit, status-change notifications (Interakt or WhatsApp Cloud API)
-4. **SMS backup notifications** — MSG91 for lead confirmation + status updates
-5. **Analytics & marketing pixels** — GA4 + Meta Pixel, track form submissions and WhatsApp clicks as conversions
-6. **Service catalog expansion (later)** — re-enable additional services (Jamabandi, Registry, EC, Rent Agreement) once Khatiyan flow is fully validated
+1. **Customer order tracking** — public lookup by phone + order ID showing current status
+2. **WhatsApp automation** — auto-confirmation message on lead submit, status-change notifications (Interakt or WhatsApp Cloud API)
+3. **SMS backup notifications** — MSG91 for lead confirmation + status updates
+4. **Analytics IDs** — replace placeholders in `src/lib/analytics.ts` with real GA4 Measurement ID and Meta Pixel ID
+5. **Service catalog expansion (later)** — re-enable additional services (Jamabandi, Registry, EC, Rent Agreement) once Khatiyan flow is fully validated
 
 > 💤 Deferred: Razorpay / online payments, customer login dashboard, multi-city expansion.
 
