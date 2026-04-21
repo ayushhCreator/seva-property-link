@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import TrustBar from '@/components/TrustBar';
 import ReviewsSection from '@/components/ReviewsSection';
 import BlogPreview from '@/components/BlogPreview';
@@ -27,7 +28,7 @@ export default function Index() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button variant="hero" size="lg" asChild>
               <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
-                Abhi Book Karo
+                <WhatsAppIcon className="h-5 w-5" /> Chat Now
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
@@ -117,7 +118,9 @@ export default function Index() {
           <p className="mt-2 text-muted-foreground">Form bhar kar ya WhatsApp kar sakte ho — your choice!</p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <Button variant="hero" size="lg" asChild>
-              <a href="https://wa.me/917464026177" target="_blank" rel="noopener noreferrer">WhatsApp Karo</a>
+              <a href="https://wa.me/917464026177" target="_blank" rel="noopener noreferrer">
+                <WhatsAppIcon className="h-5 w-5" /> Chat Now
+              </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link to="/payment">Payment Process <ArrowRight className="ml-1 h-4 w-4" /></Link>

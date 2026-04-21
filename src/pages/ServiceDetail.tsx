@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import TrustBar from '@/components/TrustBar';
 import MarqueeBanner from '@/components/MarqueeBanner';
 import { getServiceBySlug, type ServiceField } from '@/lib/services';
@@ -316,7 +317,7 @@ function ServiceExtras({ slug }: { slug: string }) {
         </Card>
         <Button variant="hero" asChild>
           <a href="https://wa.me/917464026177?text=Khatiyan%20nikalwana%20hai" target="_blank" rel="noopener noreferrer">
-            Apna khatiyan nikalwane ke liye WhatsApp par details bheje
+            <WhatsAppIcon className="h-4 w-4" /> Chat Now
           </a>
         </Button>
       </div>
@@ -359,7 +360,7 @@ function ServiceExtras({ slug }: { slug: string }) {
           <p className="mb-3 font-medium">👉 Apna case verify karne ke liye WhatsApp par details share karein</p>
           <Button variant="hero" asChild>
             <a href="https://wa.me/917464026177?text=Difference%20Money%20case%20verify%20karna%20hai" target="_blank" rel="noopener noreferrer">
-              WhatsApp Karo
+              <WhatsAppIcon className="h-4 w-4" /> Chat Now
             </a>
           </Button>
         </div>

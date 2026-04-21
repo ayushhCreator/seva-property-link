@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import TrustBar from '@/components/TrustBar';
 import { getCityBySlug, services } from '@/lib/services';
 
@@ -28,7 +29,7 @@ export default function CityPage() {
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Button variant="hero" size="lg" asChild>
                 <a href="https://wa.me/917464026177" target="_blank" rel="noopener noreferrer">
-                  WhatsApp Karo
+                  <WhatsAppIcon className="h-5 w-5" /> Chat Now
                 </a>
               </Button>
               <Button variant="outline" size="lg" asChild>

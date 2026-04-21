@@ -16,7 +16,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'nav.blog': { en: 'Blog', hi: 'ब्लॉग' },
   'nav.about': { en: 'About', hi: 'हमारे बारे में' },
   'nav.contact': { en: 'Contact', hi: 'संपर्क' },
-  'nav.whatsapp': { en: 'Chat Now', hi: 'अभी चैट करें' },
+  'nav.whatsapp': { en: 'Chat Now', hi: 'Chat Now' },
 
   // Khatian page
   'khatian.title': { en: 'Khatian Nikalna Service', hi: 'खतियान निकालने की सेवा' },
