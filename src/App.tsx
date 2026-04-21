@@ -4,9 +4,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import CookieConsent from "@/components/CookieConsent";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import ServicesPage from "./pages/ServicesPage";
 import ServiceDetail from "./pages/ServiceDetail";
+import KhatianService from "./pages/KhatianService";
 import CityPage from "./pages/CityPage";
 import PaymentPage from "./pages/PaymentPage";
 import AboutPage from "./pages/AboutPage";
@@ -23,15 +25,18 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/services/:slug" element={<ServiceDetail />} />
-          <Route path="/city/:slug" element={<CityPage />} />
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/khatian-nikalna" element={<KhatianService />} />
+            <Route path="/services/khatiyan" element={<KhatianService />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/city/:slug" element={<CityPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/pricing" element={<PricingFaqPage />} />
@@ -42,10 +47,11 @@ const App = () => (
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <CookieConsent />
-    </TooltipProvider>
+          </Routes>
+        </BrowserRouter>
+        <CookieConsent />
+      </TooltipProvider>
+    </LanguageProvider>
   </QueryClientProvider>
 );
 
