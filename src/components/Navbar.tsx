@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { services } from '@/lib/services';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -60,7 +60,7 @@ export default function Navbar() {
           <LangToggle />
           <Button variant="hero" size="sm" asChild>
             <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
-              {t('nav.whatsapp')}
+              <MessageCircle className="h-4 w-4" /> {t('nav.whatsapp')}
             </a>
           </Button>
         </div>
@@ -97,7 +97,7 @@ export default function Navbar() {
           <Link to="/contact" onClick={() => setOpen(false)} className="block py-3 text-sm font-medium">{t('nav.contact')}</Link>
           <Button variant="hero" className="mt-2 w-full" asChild>
             <a href="https://wa.me/917464026177?text=Hi%20BhumiSeva" target="_blank" rel="noopener noreferrer">
-              {t('nav.whatsapp')}
+              <MessageCircle className="h-4 w-4" /> {t('nav.whatsapp')}
             </a>
           </Button>
         </div>
