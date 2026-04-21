@@ -20,7 +20,7 @@ export default function Footer() {
           <div>
             <h4 className="mb-3 text-sm font-semibold">Services</h4>
             <ul className="space-y-2">
-              {services.map(s => (
+              {services.filter(s => s.slug === 'khatiyan').map(s => (
                 <li key={s.slug}>
                   <Link to={`/services/${s.slug}`} className="text-sm text-muted-foreground hover:text-foreground">{s.name}</Link>
                 </li>
