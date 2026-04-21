@@ -20,6 +20,10 @@ import StudioPage from "./pages/StudioPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import NotFound from "./pages/NotFound";
+import AdminAuthPage from "./pages/admin/AuthPage";
+import AdminLayout from "./components/admin/AdminLayout";
+import DashboardHome from "./pages/admin/DashboardHome";
+import LeadsPage from "./pages/admin/LeadsPage";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +50,9 @@ const App = () => (
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/admin/login" element={<AdminAuthPage />} />
+          <Route path="/admin" element={<AdminLayout><DashboardHome /></AdminLayout>} />
+          <Route path="/admin/leads" element={<AdminLayout><LeadsPage /></AdminLayout>} />
           <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
