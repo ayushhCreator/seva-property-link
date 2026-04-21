@@ -119,7 +119,7 @@ export default function KhatianService() {
       <Seo
         title="Khatian Nikalna Service in Bihar | BhumiSeva"
         description="Apply online for certified Khatiyan / land record extraction in Bihar. Fast 3-5 day delivery, expert verification, doorstep service. Apply now."
-        canonicalPath="/khatian-nikalna"
+        canonical="https://bhumiseva.co.in/khatian-nikalna"
       />
       <Navbar />
       <TrustBar />
