@@ -6,9 +6,10 @@ interface SeoProps {
   canonical?: string;
   image?: string;
   type?: 'website' | 'article';
+  keywords?: string;
 }
 
-export default function Seo({ title, description, canonical, image, type = 'website' }: SeoProps) {
+export default function Seo({ title, description, canonical, image, type = 'website', keywords }: SeoProps) {
   useEffect(() => {
     document.title = title.length > 60 ? title.slice(0, 57) + '…' : title;
 
@@ -27,6 +28,9 @@ export default function Seo({ title, description, canonical, image, type = 'webs
       setMeta('meta[name="description"]', 'content', description.slice(0, 160));
       setMeta('meta[property="og:description"]', 'content', description.slice(0, 160));
     }
+    if (keywords) {
+      setMeta('meta[name="keywords"]', 'content', keywords);
+    }
     setMeta('meta[property="og:title"]', 'content', title);
     setMeta('meta[property="og:type"]', 'content', type);
     if (image) setMeta('meta[property="og:image"]', 'content', image);
@@ -38,7 +42,7 @@ export default function Seo({ title, description, canonical, image, type = 'webs
       document.head.appendChild(link);
     }
     link.href = canonical || window.location.href;
-  }, [title, description, canonical, image, type]);
+  }, [title, description, canonical, image, type, keywords]);
 
   return null;
 }

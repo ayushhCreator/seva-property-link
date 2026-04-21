@@ -117,9 +117,10 @@ export default function KhatianService() {
   return (
     <>
       <Seo
-        title="Khatian Nikalna Service in Bihar | BhumiSeva"
-        description="Apply online for certified Khatiyan / land record extraction in Bihar. Fast 3-5 day delivery, expert verification, doorstep service. Apply now."
-        canonical="https://bhumiseva.co.in/khatian-nikalna"
+        title="Khatiyan Nikalna Online in Bihar | Land Records | BhumiSeva"
+        description="Apply online for certified Khatiyan / Bihar land records (Jamabandi, Khatian copy). Fast 3-5 day delivery, expert verification, doorstep service in Patna & all Bihar districts."
+        canonical="https://bhumiseva.co.in/services/khatiyan"
+        keywords="khatiyan nikalna, khatiyan online bihar, bihar land records, jamabandi bihar, khatian copy, khasra khatauni bihar, land record patna, bhumi jankari bihar, online khatiyan apply, certified land record bihar, BhumiSeva khatiyan"
       />
       <Navbar />
       <TrustBar />
