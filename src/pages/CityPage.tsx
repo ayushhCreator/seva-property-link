@@ -28,7 +28,7 @@ export default function CityPage() {
             <div className="mt-6 flex flex-wrap justify-center gap-4">
               <Button variant="hero" size="lg" asChild>
                 <a href="https://wa.me/917464026177" target="_blank" rel="noopener noreferrer">
-                  WhatsApp Karo
+                  <WhatsAppIcon className="h-5 w-5" /> Chat Now
                 </a>
               </Button>
               <Button variant="outline" size="lg" asChild>
