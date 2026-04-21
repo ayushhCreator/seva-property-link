@@ -23,6 +23,10 @@ export interface LeadData {
   registry_city?: string;
   registry_year?: string;
   area_mohalla?: string;
+  block?: string;
+  thana?: string;
+  mouza?: string;
+  owner_name?: string;
   message?: string;
   consent: boolean;
 }
