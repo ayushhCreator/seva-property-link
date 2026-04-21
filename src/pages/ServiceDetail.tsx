@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import TrustBar from '@/components/TrustBar';
 import MarqueeBanner from '@/components/MarqueeBanner';
 import { getServiceBySlug, type ServiceField } from '@/lib/services';

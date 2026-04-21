@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import TrustBar from '@/components/TrustBar';
 import { getCityBySlug, services } from '@/lib/services';
 
