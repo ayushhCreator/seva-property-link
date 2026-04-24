@@ -51,6 +51,26 @@ const post = defineType({
     defineField({ name: 'author', type: 'reference', to: [{ type: 'author' }] }),
     defineField({ name: 'publishedAt', type: 'datetime', validation: (R) => R.required() }),
     defineField({ name: 'tags', type: 'array', of: [{ type: 'string' }], options: { layout: 'tags' } }),
+    defineField({
+      name: 'language',
+      type: 'string',
+      title: 'Language',
+      options: {
+        list: [
+          { title: 'Hinglish (Roman)', value: 'hinglish' },
+          { title: 'English', value: 'en' },
+          { title: 'Hindi (Devanagari)', value: 'hi' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'hinglish',
+    }),
+    defineField({
+      name: 'relatedLanguageVersions',
+      type: 'array',
+      title: 'Other language versions of this post',
+      of: [{ type: 'reference', to: [{ type: 'post' }] }],
+    }),
   ],
   preview: { select: { title: 'title', media: 'coverImage', subtitle: 'publishedAt' } },
 });

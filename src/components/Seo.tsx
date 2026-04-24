@@ -7,9 +7,10 @@ interface SeoProps {
   image?: string;
   type?: 'website' | 'article';
   keywords?: string;
+  hreflangLinks?: { lang: string; href: string }[];
 }
 
-export default function Seo({ title, description, canonical, image, type = 'website', keywords }: SeoProps) {
+export default function Seo({ title, description, canonical, image, type = 'website', keywords, hreflangLinks }: SeoProps) {
   useEffect(() => {
     document.title = title.length > 60 ? title.slice(0, 57) + '…' : title;
 
@@ -42,7 +43,20 @@ export default function Seo({ title, description, canonical, image, type = 'webs
       document.head.appendChild(link);
     }
     link.href = canonical || window.location.href;
-  }, [title, description, canonical, image, type, keywords]);
+
+    // Remove existing hreflang links before re-adding
+    document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+
+    if (hreflangLinks && hreflangLinks.length > 0) {
+      hreflangLinks.forEach(({ lang, href }) => {
+        const hrefLangEl = document.createElement('link');
+        hrefLangEl.rel = 'alternate';
+        hrefLangEl.setAttribute('hreflang', lang);
+        hrefLangEl.href = href;
+        document.head.appendChild(hrefLangEl);
+      });
+    }
+  }, [title, description, canonical, image, type, keywords, hreflangLinks]);
 
   return null;
 }

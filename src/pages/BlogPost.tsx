@@ -66,6 +66,16 @@ export default function BlogPost() {
         description={post.excerpt}
         image={coverUrl}
         type="article"
+        hreflangLinks={[
+          {
+            lang: post.language === 'en' ? 'en' : post.language === 'hi' ? 'hi' : 'x-default',
+            href: window.location.href,
+          },
+          ...(post.relatedLanguageVersions || []).map((v) => ({
+            lang: v.language === 'en' ? 'en' : v.language === 'hi' ? 'hi' : 'x-default',
+            href: `${window.location.origin}/blog/${v.slug.current}`,
+          })),
+        ]}
       />
       <Navbar />
       <main className="container max-w-3xl py-10">
@@ -107,6 +117,26 @@ export default function BlogPost() {
           </div>
 
           <AdSlot className="mt-8" />
+
+          {post.relatedLanguageVersions && post.relatedLanguageVersions.length > 0 && (
+            <div className="mt-6 rounded-lg border bg-accent/20 p-4">
+              <p className="mb-2 text-sm font-medium text-muted-foreground">This post is also available in:</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">
+                  {post.language === 'en' ? 'English' : post.language === 'hi' ? 'हिंदी' : 'Hinglish'} (current)
+                </span>
+                {post.relatedLanguageVersions.map((v) => (
+                  <Link
+                    key={v.slug.current}
+                    to={`/blog/${v.slug.current}`}
+                    className="rounded-full border px-3 py-1 text-xs font-medium hover:bg-accent transition-colors"
+                  >
+                    {v.language === 'en' ? 'English' : v.language === 'hi' ? 'हिंदी' : 'Hinglish'}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </main>
       <Footer />
