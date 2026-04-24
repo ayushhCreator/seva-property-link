@@ -28,11 +28,13 @@ export interface PostListItem {
   coverImage?: SanityImageSource & { alt?: string };
   tags?: string[];
   author?: { name: string };
+  language?: 'hinglish' | 'en' | 'hi';
 }
 
 export interface PostDetail extends PostListItem {
   body: unknown[];
   author?: { name: string; image?: SanityImageSource; bio?: string };
+  relatedLanguageVersions?: { title: string; slug: { current: string }; language: string }[];
 }
 
 export const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
@@ -43,6 +45,7 @@ export const POSTS_QUERY = `*[_type == "post" && defined(slug.current)] | order(
   publishedAt,
   coverImage,
   tags,
+  language,
   "author": author->{ name }
 }`;
 
@@ -54,6 +57,8 @@ export const POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0
   publishedAt,
   coverImage,
   tags,
+  language,
   body,
-  "author": author->{ name, image, bio }
+  "author": author->{ name, image, bio },
+  "relatedLanguageVersions": relatedLanguageVersions[]->{ title, slug, language }
 }`;
